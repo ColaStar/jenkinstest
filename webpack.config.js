@@ -10,12 +10,15 @@ const {
   join,
   resolve
 } = require('path')
+
+
 const ConsoleLogOnBuildWebpackPlugin = require('./config/htmlAfterPligin')
 let _plugins = [];
 let _entry = {};
 
-console.log(files, /.+\/([a-zA-Z]+-[a-zA-Z]+)(\.entry\.js)$/g.test(files[0]) == true)
 
+
+console.log(files, /.+\/([a-zA-Z]+-[a-zA-Z]+)(\.entry\.js)$/g.test(files[0]) == true)
 for (let item of files) {
   if (/.+\/([a-zA-Z]+-[a-zA-Z]+)(\.entry\.js)$/g.test(item) === true) {
     const entryKey = RegExp.$1; //第一组
