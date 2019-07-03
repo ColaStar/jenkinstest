@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="中文">
+  <title>{% block title %}[[ user.name ]]{% endblock %}</title>
+
+
+  {% block head %}
+  <!-- <link rel="stylesheet" href="/css/index.css"> -->
+  <link href="https://cdn.bootcss.com/bootstrap-table/1.14.2/bootstrap-table.min.css" rel="stylesheet">
+  <link href="/css/index.css" rel="stylesheet">
+  {% endblock %}
+</head>
+
+<body>
+    <img src="/images//bg4.png" alt="">
+
+  <!-- {% if list.name %}<ul>{% endif %} -->
+  <!-- <div class="table-responsive">
+    <table class="table table-hover">
+      {% for item in result %}
+      <tr class="active">
+        <td>[[ item.bid ]]</td>
+        <td>[[ item.name ]]</td>
+        <td>[[ item.price ]]</td>
+        <td>[[ item.content ]]</td>
+        <td onclick="del([[ item.bid]])">删除</td>
+      </tr>
+      {% endfor %}
+
+    </table>
+  </div> -->
+  <x-clock></x-clock>
+  <x-frankenstein data-result=[[ JSON.stringify(result) ]]></x-frankenstein>
+</body>
+
+</html>
+{% block script %}
+<script src="/js/x-tag-core.js"></script>
+<script type="module">
+  xtag.create('x-frankenstein', class extends XTagElement {
+    constructor (){
+      super()
+      this.arr = []
+  }
+  name (){ return 'Frankenstein'; }
+  set 'dataResult::attr' (value){
+   this.arr = JSON.parse(value)
+  }
+
+  '::template(true)' (){
+    console.log(this.arr)
+    let html = ''
+    this.arr.map(item=>{
+       html +=`<tr class="active">
+        <td>${item.bid}</td>
+        <td>${item.name}<td>
+        <td>${item.price}<td>
+        <td>${item.content}</td>
+        <td onclick="del(${item.bid})">删除</td>
+      </tr>`
+    })
+    // console.log()
+    return ` <div class="table-responsive">
+    <table class="table table-hover">
+      ${html}
+    </table>
+  </div>`
+  }
+});
+  xtag.create('x-clock', class extends XTagElement {
+    name() {
+      return 'Frankenstein';
+    }
+    connectedCallback() {
+      this.start();
+    }
+    start() {
+      this.update();
+      this._interval = setInterval(() => this.update(), 1000);
+    }
+    stop() {
+      this._interval = clearInterval(this._data.interval);
+    }
+    update() {
+      this.textContent = new Date().toLocaleTimeString();
+    }
+    'tap::event'() {
+      if (this._interval) this.stop();
+      else this.start();
+    }
+  });
+
+</script>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  function del(bid) {
+    const data = {
+      id: bid
+    }
+    $.ajax({
+      url: 'http://localhost:8082/del',
+      method: "get",
+      data: data,
+      success: function (data) {
+        console.log(data)
+      }
+    })
+  }
+
+</script>
+{% endblock %}

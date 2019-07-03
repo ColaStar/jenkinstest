@@ -1,0 +1,66 @@
+<!-- es6yu与es5模块导入以及兼容性问题解决 -->
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="中文">
+  <title>{% block title %}[[ user.name ]]{% endblock %}</title>
+
+
+  {% block head %}
+  <link rel="stylesheet" href="/css/index.css">
+  {% endblock %}
+</head>
+
+<body>
+
+  {% block content %}
+
+  <p>By [[ user.name ]], [[ user.email ]]</p>
+
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+  <input type="button" value="button"  id="js-btn">
+
+  {% endblock %}
+
+
+  {% block scripts %}
+  <script src="/js/yd.js"></script>
+  <!-- es6更改type导入 浏览器支持module-->
+  <script type="module">
+    import a from '/js/index.js'
+// import('/js/index.js').then((_)=>{
+//     console.log(_.default)
+// })
+
+
+//  <!-- 函数节流
+  let btn = document.getElementById('js-btn')
+  btn.addEventListener('click',_.throttle(()=>{
+    console.log(Math.random())
+  }))
+</script>
+
+
+
+
+  <!-- es解决es6编写文件问题 -->
+  <!-- babel -->
+  <!-- systmjs微前端用 --浏览器不支持module -->
+  <script src="https://cdn.bootcss.com/systemjs/3.1.6/system.min.js"></script>
+  <script>
+    System.import('/js/index.bundle.js').then((_) => {
+      console.log(_.default)
+    })
+
+  </script>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+
+  {% endblock %}
+</body>
+
+</html>
