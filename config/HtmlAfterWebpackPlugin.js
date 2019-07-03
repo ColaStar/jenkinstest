@@ -5,7 +5,7 @@ const assetsHelp = (data) => {
     let css = [];
 
     const dir = {
-        js: item => `<script class="lazyload-js" src="${item}"></script>`,
+        js: item => `<script class="lazyload-js" type="module" src="${item}"></script>`,
         css: item => `<link class="lazyload-css" rel="stylesheet" href="${item}">`
     };
 

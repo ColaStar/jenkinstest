@@ -12,17 +12,14 @@ const {
 } = require('path')
 
 
-const ConsoleLogOnBuildWebpackPlugin = require('./config/htmlAfterPligin')
+const ConsoleLogOnBuildWebpackPlugin = require('./config/HtmlAfterWebpackPlugin')
 let _plugins = [];
 let _entry = {};
 
 
-
-console.log(files, /.+\/([a-zA-Z]+-[a-zA-Z]+)(\.entry\.js)$/g.test(files[0]) == true)
 for (let item of files) {
   if (/.+\/([a-zA-Z]+-[a-zA-Z]+)(\.entry\.js)$/g.test(item) === true) {
     const entryKey = RegExp.$1; //第一组
-    console.log(entryKey, item, 'xxxxxxxxx')
     let [dist, template] = entryKey.split('-');
     _plugins.push(
       new HtmlWebpackPlugin({
