@@ -21,7 +21,8 @@ if (process.env.NODE_ENV == "development") {
 
 if (process.env.NODE_ENV == "production") {
   const localConfig = {
-    port: 80
+    port: 80,
+    baseUrl: 'http://10.26.25.182/basic/web/index.php?r='
   }
   config = extend(config, localConfig);
 }
