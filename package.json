@@ -9,6 +9,7 @@
     "server:prod": "scripty",
     "server:hint": "scripty",
     "server:start": "scripty",
+    "start":"cross-env NODE_ENV=development nodemon ./app.js",
     "build": "babel ./assets/js/index.js -o ./assets/js/index.bundle.js",
     "client:dev": "scripty",
     "client:prod": "scripty"
