@@ -9,7 +9,7 @@
     "server:prod": "scripty",
     "server:hint": "scripty",
     "server:start": "scripty",
-    "start":"nodemon ./app.js",
+    "start":"nodemon ./dist/app.js",
     "build": "babel ./assets/js/index.js -o ./assets/js/index.bundle.js",
     "client:dev": "scripty",
     "client:prod": "scripty"
