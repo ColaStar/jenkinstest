@@ -52,13 +52,13 @@
     "yargs-parser": "^13.1.1",
     "bower": "^1.8.8",
     "gulp-babel": "^8.0.0",
-    "log4js": "^4.3.1",
+    "log4js": "^6.4.0",
     "polymerjs": "^1.0.23"
   },
   "dependencies": {
     "bower": "^1.8.8",
     "gulp-babel": "^8.0.0",
-    "log4js": "^4.3.1",
+    "log4js": "^6.4.0",
     "polymerjs": "^1.0.23",
     "scripty": "^1.9.1"
   }
